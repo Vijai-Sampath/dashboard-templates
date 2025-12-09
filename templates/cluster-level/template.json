@@ -6,97 +6,6 @@
     "links": [],
     "panels": [
       {
-        "id": "ies4jhpptn",
-        "tz": "local",
-        "axis": {
-          "x": {
-            "date_style": "auto"
-          },
-          "y": {
-            "format": "duration",
-            "decimals": 3,
-            "multiplyBy": 1000
-          }
-        },
-        "STATS": {},
-        "table": {},
-        "title": "Total Nodes",
-        "panelType": "STATS",
-        "timeRange": "1h",
-        "TimeSeries": {},
-        "statConfig": {
-          "color": {
-            "scheme": "fixed",
-            "fixedColor": "#3e41ce"
-          },
-          "format": "unformatted",
-          "decimals": 3,
-          "statView": "grid",
-          "baseColor": "#4CBB17",
-          "colorMode": "",
-          "multiplyBy": "",
-          "thresholds": [],
-          "calculation": "last"
-        },
-        "timeseries": {
-          "legend": {
-            "view": "list",
-            "values": []
-          }
-        },
-        "description": "Total Nodes in the cluster",
-        "node_configs": [
-          {
-            "exp": "count(k8s_node_uptime{k8s_cluster_name=\"$cluster\"})",
-            "page": 1,
-            "stat": "",
-            "type": "query",
-            "limit": null,
-            "hidden": false,
-            "metric": "",
-            "nodeId": "A",
-            "region": "",
-            "source": "kloudmate",
-            "dataset": "metrics",
-            "filters": [
-              {
-                "type": "string",
-                "field": "k8s_cluster_name",
-                "value": "$cluster",
-                "operator": "="
-              }
-            ],
-            "groupBy": [],
-            "orderBy": [],
-            "interval": "",
-            "namespace": "",
-            "dimensions": [],
-            "metricType": "",
-            "query_type": "promql",
-            "time_range": {
-              "to": 0,
-              "from": 600
-            },
-            "aggregation": {
-              "stat": "COUNT",
-              "type": "",
-              "unit": "s",
-              "field": "",
-              "value": "k8s_node_uptime",
-              "metric": "k8s_node_uptime",
-              "metricType": "Sum",
-              "temporality": "Cumulative"
-            },
-            "datasourceId": "kloudmate",
-            "responseType": "series"
-          }
-        ],
-        "time_options": {
-          "override": false,
-          "time_shift": ""
-        }
-      },
-      {
         "id": "9uo2d83i06o",
         "tz": "local",
         "axis": {
@@ -1363,6 +1272,295 @@
           "override": false,
           "time_shift": ""
         }
+      },
+      {
+        "id": "4a89b1jjd2o",
+        "tz": "local",
+        "axis": {
+          "x": {
+            "date_style": "auto"
+          },
+          "y": {
+            "format": "duration",
+            "decimals": 3,
+            "multiplyBy": 1000
+          }
+        },
+        "STATS": {},
+        "table": {},
+        "title": "Active Nodes",
+        "panelType": "STATS",
+        "timeRange": "5m",
+        "TimeSeries": {},
+        "statConfig": {
+          "color": {
+            "scheme": "fixed",
+            "fixedColor": "#76c029"
+          },
+          "format": "number",
+          "suffix": "",
+          "decimals": 3,
+          "statView": "grid",
+          "baseColor": "#4CBB17",
+          "colorMode": "",
+          "calculation": "last"
+        },
+        "timeseries": {
+          "legend": {
+            "view": "list",
+            "values": []
+          }
+        },
+        "description": "Nodes that are currently active in the Cluster",
+        "node_configs": [
+          {
+            "exp": "count(k8s_node_condition{condition=\"Ready\", k8s_cluster_name=\"$cluster\"}==1)",
+            "page": 1,
+            "stat": "",
+            "type": "query",
+            "limit": null,
+            "hidden": false,
+            "metric": "",
+            "nodeId": "A",
+            "region": "",
+            "source": "kloudmate",
+            "dataset": "metrics",
+            "filters": [
+              {
+                "type": "string",
+                "field": "k8s_cluster_name",
+                "value": "$cluster",
+                "operator": "="
+              }
+            ],
+            "groupBy": [],
+            "orderBy": [],
+            "interval": "",
+            "namespace": "",
+            "dimensions": [],
+            "metricType": "",
+            "query_type": "promql",
+            "time_range": {
+              "to": 0,
+              "from": 600
+            },
+            "aggregation": {
+              "stat": "COUNT",
+              "type": "",
+              "unit": "s",
+              "field": "",
+              "value": "k8s_node_uptime",
+              "metric": "k8s_node_uptime",
+              "metricType": "Sum",
+              "temporality": "Cumulative"
+            },
+            "datasourceId": "kloudmate",
+            "responseType": "series",
+            "promql_query_type": "instant"
+          }
+        ],
+        "time_options": {
+          "override": false,
+          "time_shift": ""
+        }
+      },
+      {
+        "id": "r2mcfv2cuh",
+        "tz": "local",
+        "axis": {
+          "x": {
+            "date_style": "auto"
+          },
+          "y": {
+            "format": "bytes",
+            "suffix": "/s",
+            "decimals": 1
+          }
+        },
+        "title": "Network Transmit Bytes/s",
+        "tooltip": {
+          "mode": "all"
+        },
+        "panelType": "TimeSeries",
+        "timeRange": "1h",
+        "statConfig": {
+          "statView": "grid",
+          "baseColor": "#4CBB17",
+          "calculation": "last"
+        },
+        "timeseries": {
+          "legend": {
+            "view": "table",
+            "values": [
+              {
+                "label": "Mean",
+                "value": "mean"
+              },
+              {
+                "label": "Last",
+                "value": "last"
+              }
+            ]
+          }
+        },
+        "description": "Rate of network output bytes per second",
+        "node_configs": [
+          {
+            "page": 1,
+            "stat": "",
+            "type": "query",
+            "hidden": false,
+            "metric": "",
+            "nodeId": "A",
+            "region": "",
+            "source": "kloudmate",
+            "dataset": "metrics",
+            "filters": [
+              {
+                "type": "string",
+                "field": "direction",
+                "value": "transmit",
+                "operator": "="
+              },
+              {
+                "type": "string",
+                "field": "k8s_cluster_name",
+                "value": "$cluster",
+                "operator": "="
+              }
+            ],
+            "groupBy": [
+              {
+                "type": "string",
+                "field": "k8s_node_name"
+              }
+            ],
+            "orderBy": [],
+            "interval": "",
+            "namespace": "",
+            "dimensions": [],
+            "metricType": "",
+            "time_range": {
+              "to": 0,
+              "from": 600
+            },
+            "aggregation": {
+              "stat": "RATE",
+              "type": "",
+              "unit": "By",
+              "field": "",
+              "range": "5m",
+              "value": "k8s_node_network_io_rate",
+              "metric": "k8s_node_network_io_rate",
+              "metricType": "Sum",
+              "temporality": "Cumulative"
+            },
+            "datasourceId": "kloudmate"
+          }
+        ],
+        "time_options": {
+          "override": false,
+          "time_shift": ""
+        }
+      },
+      {
+        "id": "3smv9hi417l",
+        "tz": "local",
+        "axis": {
+          "x": {
+            "date_style": "auto"
+          },
+          "y": {
+            "format": "bytes",
+            "suffix": "/s",
+            "decimals": 1
+          }
+        },
+        "title": "Network Receive Bytes/s ",
+        "tooltip": {
+          "mode": "all"
+        },
+        "panelType": "TimeSeries",
+        "timeRange": "1h",
+        "statConfig": {
+          "statView": "grid",
+          "baseColor": "#4CBB17",
+          "calculation": "last"
+        },
+        "timeseries": {
+          "legend": {
+            "view": "table",
+            "values": [
+              {
+                "label": "Mean",
+                "value": "mean"
+              },
+              {
+                "label": "Last",
+                "value": "last"
+              }
+            ]
+          }
+        },
+        "description": "Rate of network Input bytes per second",
+        "node_configs": [
+          {
+            "page": 1,
+            "stat": "",
+            "type": "query",
+            "hidden": false,
+            "metric": "",
+            "nodeId": "A",
+            "region": "",
+            "source": "kloudmate",
+            "dataset": "metrics",
+            "filters": [
+              {
+                "type": "string",
+                "field": "direction",
+                "value": "receive",
+                "operator": "="
+              },
+              {
+                "type": "string",
+                "field": "k8s_cluster_name",
+                "value": "$cluster",
+                "operator": "="
+              }
+            ],
+            "groupBy": [
+              {
+                "type": "string",
+                "field": "k8s_node_name"
+              }
+            ],
+            "orderBy": [],
+            "interval": "",
+            "namespace": "",
+            "dimensions": [],
+            "metricType": "",
+            "time_range": {
+              "to": 0,
+              "from": 600
+            },
+            "aggregation": {
+              "stat": "RATE",
+              "type": "",
+              "unit": "By",
+              "field": "",
+              "range": "5m",
+              "value": "k8s_node_network_io_rate",
+              "metric": "k8s_node_network_io_rate",
+              "metricType": "Sum",
+              "temporality": "Cumulative"
+            },
+            "datasourceId": "kloudmate"
+          }
+        ],
+        "time_options": {
+          "override": false,
+          "time_shift": ""
+        }
       }
     ],
     "timeRange": "30m",
@@ -1444,17 +1642,6 @@
       }
     ],
     "panel_layouts": [
-      {
-        "h": 5,
-        "i": "ies4jhpptn",
-        "w": 4,
-        "x": 0,
-        "y": 0,
-        "minH": 1,
-        "minW": 1,
-        "moved": false,
-        "static": false
-      },
       {
         "h": 5,
         "i": "9uo2d83i06o",
@@ -1604,6 +1791,39 @@
         "w": 12,
         "x": 0,
         "y": 23,
+        "minH": 1,
+        "minW": 1,
+        "moved": false,
+        "static": false
+      },
+      {
+        "h": 5,
+        "i": "4a89b1jjd2o",
+        "w": 4,
+        "x": 0,
+        "y": 0,
+        "minH": 1,
+        "minW": 1,
+        "moved": false,
+        "static": false
+      },
+      {
+        "h": 10,
+        "i": "r2mcfv2cuh",
+        "w": 12,
+        "x": 0,
+        "y": 31,
+        "minH": 1,
+        "minW": 1,
+        "moved": false,
+        "static": false
+      },
+      {
+        "h": 10,
+        "i": "3smv9hi417l",
+        "w": 12,
+        "x": 12,
+        "y": 31,
         "minH": 1,
         "minW": 1,
         "moved": false,
