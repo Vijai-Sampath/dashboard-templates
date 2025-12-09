@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
   "title": "Kubernetes Namespace Level",
+=======
+  "title": "Kuberenetes Namespace Level",
+>>>>>>> Stashed changes
   "description": "Kubernetes namespaces monitoring using KM Agent, provides visibility into key metrics including CPU and memory utilization, pod counts, network traffic aggregated per namespace.",
   "tags": ["metrics", "K8s"],
   "author": "KloudMate",
