@@ -3,6 +3,7 @@
   "description": "",
   "data": {
     "tz": "local",
+    "links": [],
     "panels": [
       {
         "id": "ies4jhpptn",
@@ -24,8 +25,17 @@
         "timeRange": "1h",
         "TimeSeries": {},
         "statConfig": {
+          "color": {
+            "scheme": "fixed",
+            "fixedColor": "#3e41ce"
+          },
+          "format": "unformatted",
+          "decimals": 3,
           "statView": "grid",
           "baseColor": "#4CBB17",
+          "colorMode": "",
+          "multiplyBy": "",
+          "thresholds": [],
           "calculation": "last"
         },
         "timeseries": {
@@ -34,9 +44,10 @@
             "values": []
           }
         },
+        "description": "Total Nodes in the cluster",
         "node_configs": [
           {
-            "exp": "",
+            "exp": "count(k8s_node_uptime{k8s_cluster_name=\"$cluster\"})",
             "page": 1,
             "stat": "",
             "type": "query",
@@ -51,7 +62,7 @@
               {
                 "type": "string",
                 "field": "k8s_cluster_name",
-                "value": "agent-poc",
+                "value": "$cluster",
                 "operator": "="
               }
             ],
@@ -61,7 +72,7 @@
             "namespace": "",
             "dimensions": [],
             "metricType": "",
-            "query_type": "qb",
+            "query_type": "promql",
             "time_range": {
               "to": 0,
               "from": 600
@@ -71,8 +82,8 @@
               "type": "",
               "unit": "s",
               "field": "",
-              "value": "k8s_node_cpu_time",
-              "metric": "k8s_node_cpu_time",
+              "value": "k8s_node_uptime",
+              "metric": "k8s_node_uptime",
               "metricType": "Sum",
               "temporality": "Cumulative"
             },
@@ -113,6 +124,7 @@
             "values": []
           }
         },
+        "description": "Total Deployments in the cluster",
         "node_configs": [
           {
             "page": 1,
@@ -128,7 +140,7 @@
               {
                 "type": "string",
                 "field": "k8s_cluster_name",
-                "value": "agent-poc",
+                "value": "$cluster",
                 "operator": "="
               }
             ],
@@ -189,6 +201,7 @@
             "values": []
           }
         },
+        "description": "Total Replicasets is the cluster",
         "node_configs": [
           {
             "page": 1,
@@ -204,7 +217,7 @@
               {
                 "type": "string",
                 "field": "k8s_cluster_name",
-                "value": "agent-poc",
+                "value": "$cluster",
                 "operator": "="
               }
             ],
@@ -265,11 +278,14 @@
             "values": []
           }
         },
+        "description": "Total Daemonsets in the Cluster",
         "node_configs": [
           {
+            "exp": "",
             "page": 1,
             "stat": "",
             "type": "query",
+            "limit": null,
             "hidden": false,
             "metric": "",
             "nodeId": "A",
@@ -290,6 +306,7 @@
             "namespace": "",
             "dimensions": [],
             "metricType": "",
+            "query_type": "qb",
             "time_range": {
               "to": 0,
               "from": 600
@@ -342,9 +359,10 @@
             "values": []
           }
         },
+        "description": "Total Pods in the cluster",
         "node_configs": [
           {
-            "exp": "count()",
+            "exp": "count(k8s_pod_phase{k8s_cluster_name=\"$cluster\"})",
             "page": 1,
             "stat": "",
             "type": "query",
@@ -369,7 +387,7 @@
             "namespace": "",
             "dimensions": [],
             "metricType": "",
-            "query_type": "qb",
+            "query_type": "promql",
             "time_range": {
               "to": 0,
               "from": 600
@@ -406,7 +424,7 @@
           }
         },
         "STATS": {},
-        "title": "Total Containers",
+        "title": "Total Containers Ready",
         "panelType": "STATS",
         "timeRange": "1h",
         "statConfig": {
@@ -420,11 +438,14 @@
             "values": []
           }
         },
+        "description": "Total number of containers in ready state in the cluster",
         "node_configs": [
           {
+            "exp": "",
             "page": 1,
             "stat": "",
             "type": "query",
+            "limit": null,
             "hidden": false,
             "metric": "",
             "nodeId": "A",
@@ -445,6 +466,7 @@
             "namespace": "",
             "dimensions": [],
             "metricType": "",
+            "query_type": "qb",
             "time_range": {
               "to": 0,
               "from": 600
@@ -496,6 +518,7 @@
             "values": []
           }
         },
+        "description": "Total Deployments in the cluster",
         "node_configs": [
           {
             "exp": "",
@@ -575,6 +598,7 @@
             "values": []
           }
         },
+        "description": "Total Statefulsets in the cluster",
         "node_configs": [
           {
             "page": 1,
@@ -682,10 +706,15 @@
               {
                 "label": "Mean",
                 "value": "mean"
+              },
+              {
+                "label": "Last",
+                "value": "last"
               }
             ]
           }
         },
+        "description": "CPU Utilization by Nodes in the cluster (100% = 1 CPU core)",
         "node_configs": [
           {
             "page": 1,
@@ -820,10 +849,16 @@
         },
         "timeseries": {
           "legend": {
-            "view": "list",
-            "values": []
+            "view": "table",
+            "values": [
+              {
+                "label": "Last",
+                "value": "last"
+              }
+            ]
           }
         },
+        "description": "Total Filesystem Capacity of each node in the cluster",
         "node_configs": [
           {
             "page": 1,
@@ -902,10 +937,16 @@
         },
         "timeseries": {
           "legend": {
-            "view": "list",
-            "values": []
+            "view": "table",
+            "values": [
+              {
+                "label": "Last",
+                "value": "last"
+              }
+            ]
           }
         },
+        "description": "Filesystem used by each node in the cluster",
         "node_configs": [
           {
             "page": 1,
@@ -984,10 +1025,16 @@
         },
         "timeseries": {
           "legend": {
-            "view": "list",
-            "values": []
+            "view": "table",
+            "values": [
+              {
+                "label": "Last",
+                "value": "last"
+              }
+            ]
           }
         },
+        "description": "Available Filesystem for each node in the cluster",
         "node_configs": [
           {
             "page": 1,
@@ -1079,6 +1126,7 @@
             ]
           }
         },
+        "description": "Resident Set Size (Rss) Memory Usage by nodes in the cluster",
         "node_configs": [
           {
             "page": 1,
@@ -1149,7 +1197,7 @@
           "mode": "all"
         },
         "panelType": "TimeSeries",
-        "timeRange": "5m",
+        "timeRange": "1d",
         "statConfig": {
           "statView": "grid",
           "baseColor": "#4CBB17",
@@ -1164,12 +1212,13 @@
                 "value": "max"
               },
               {
-                "label": "Mean",
-                "value": "mean"
+                "label": "Last",
+                "value": "last"
               }
             ]
           }
         },
+        "description": "Usage of Memory Working Set by Nodes in the cluster",
         "node_configs": [
           {
             "page": 1,
@@ -1261,6 +1310,7 @@
             ]
           }
         },
+        "description": "Number of memory page faults that have occurred in each node in the cluster",
         "node_configs": [
           {
             "page": 1,
@@ -1315,7 +1365,7 @@
         }
       }
     ],
-    "timeRange": "1h",
+    "timeRange": "30m",
     "variables": [
       {
         "name": "cluster",
@@ -1334,7 +1384,63 @@
         },
         "is_multi": false,
         "description": "",
-        "show_all_option": false
+        "usedInPanels": [
+          {
+            "id": "njt4jnamxt",
+            "name": "Total Daemonsets"
+          },
+          {
+            "id": "poduynyl1ce",
+            "name": "Total Pods"
+          },
+          {
+            "id": "60fc05ik9z6",
+            "name": "Total Containers"
+          },
+          {
+            "id": "0w011hyl2i2n",
+            "name": "Total Namespace"
+          },
+          {
+            "id": "9y2jx4c9dtc",
+            "name": "Total Statefulsets"
+          },
+          {
+            "id": "l8588ojaqbq",
+            "name": "CPU Utilization by Nodes"
+          },
+          {
+            "id": "cx6vo7t0q1m",
+            "name": "Filesytem Total"
+          },
+          {
+            "id": "ew78y5i34om",
+            "name": "Filesystem Usage"
+          },
+          {
+            "id": "2dzo223tuq6",
+            "name": "Filesystem Available"
+          },
+          {
+            "id": "lpe1g9d0epg",
+            "name": "Memory Rss by Node"
+          },
+          {
+            "id": "lnkmn4qnq8",
+            "name": "Memory Working Set by Nodes"
+          },
+          {
+            "id": "hg0bc8zck4j",
+            "name": "Memory Page Fault by Nodes"
+          },
+          {
+            "id": "gax9irkoxig",
+            "name": "Nodes Uptime"
+          }
+        ],
+        "usesVariables": [],
+        "show_all_option": false,
+        "usedInVariables": []
       }
     ],
     "panel_layouts": [
