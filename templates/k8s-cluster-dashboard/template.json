@@ -1,0 +1,32 @@
+{
+  "name": "Kubernetes Cluster Dashboard",
+  "description": "",
+  "data": {
+    "tz": "local",
+    "panels": [
+      {
+        "id": "ies4jhpptn",
+        "tz": "local",
+        "axis": {
+          "x": {
+            "date_style": "auto"
+          },
+          "y": {
+            "format": "duration",
+            "decimals": 3,
+            "multiplyBy": 1000
+          }
+        },
+        "STATS": {},
+        "table": {},
+        "title": "Total Nodes",
+        "panelType": "STATS",
+        "timeRange": "1h",
+        "TimeSeries": {},
+        "statConfig": {
+          "statView": "grid",
+          "baseColor": "#4CBB17",
+          "calculation": "last"
+        },
+        "timeseries": {
+          "legend": {
